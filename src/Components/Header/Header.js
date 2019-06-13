@@ -1,4 +1,7 @@
 import React from 'react';
+import {connect} from 'react-redux';
+
+import {updateUsername, updatePassword} from '../../reducks/reducer';
 
 function Header(){
     return(
@@ -10,4 +13,9 @@ function Header(){
     )
 }
 
-export default Header
+const mapStateToProps = state =>{
+    const {} = ;
+    return 
+}
+
+export default connect(mapStateToProps, {updateUsername, updatePassword})(Header)
