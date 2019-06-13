@@ -21,10 +21,26 @@ async function register(req, res){
     }
 }
 async function login(req, res){
+    const db = req.app.get('db');
+    const {username, password}=req.body;
 
+    const foundUser = await db.get_user(username)
+    if(!foundUser[0]){
+        return res.status(401).json('Username not found, No entry for you!')
+    }
+    const isAuthenticated = bcript.compareSync(password, foundUser[0].hash)
+    if(!isAuthenticated){
+        return res.status(403).json('Wrong Password, Larry')
+    }
+    
+    req.session.user ={
+        username: foundUser[0].username,
+        userId: foundUser[0].id
+    }
 }
 async function logout(req, res){
-
+    req.session.destroy()
+    res.status(200).json('User Logged Out')
 }
 
 module.exports ={
