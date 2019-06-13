@@ -13,7 +13,7 @@ class Auth extends Component{
     render(){
         return(
             <main>
-                Auth
+                Home
             </main>
         )
     }

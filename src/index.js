@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {HashRouter} from 'react-router-dom';
 import {Provider} from 'react-redux';
 
+import './reset.css'
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';

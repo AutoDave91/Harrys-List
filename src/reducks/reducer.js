@@ -3,7 +3,8 @@ import axios from 'axios';
 const initialState ={
     username: '',
     password: '',
-    loggedin: false
+    loggedIn: false,
+    user: []
 }
 
 const UPDATE_USERNAME = 'UPDATE_USERNAME';
@@ -24,6 +25,17 @@ export const updatePassword = (password)=>{
         payload: password
     }
 }
+export const register = (username, password)=>{
+    // console.log(username, password)
+    let user = axios
+        .post('/api/register', {username, password})
+        .then(response => response.data)
+        // .catch(console.log('Error while registering.'))
+    return{
+        type: REGISTER,
+        payload: user
+    }
+}
 
 function reducer(state= initialState, action){
     switch(action.type){
@@ -38,6 +50,12 @@ function reducer(state= initialState, action){
                 password: action.payload
             }
         default: return state
+        case REGISTER:
+            return{
+                ...state,
+                user: action.payload,
+                loggedIn: true
+            }
     }
 }
 
